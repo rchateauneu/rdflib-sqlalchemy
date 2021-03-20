@@ -53,7 +53,7 @@ class StoreTestCase(unittest.TestCase):
         for i in ['500triples', '1ktriples', '2ktriples',
                   '3ktriples', '5ktriples', '10ktriples',
                   '25ktriples']:
-            inputloc = os.getcwd() + '/test/sp2b/%s.n3' % i
+            inputloc = os.path.dirname(__file__) + '/sp2b/%s.n3' % i
             # cleanup graph's so that BNodes in input data
             # won't create random results
             self.input = Graph()
@@ -95,9 +95,7 @@ class SQLAlchemyStoreTestCase(StoreTestCase):
     def setUp(self):
         """Setup."""
         self.store = "SQLAlchemy"
-        self.path = "sqlite:///%(here)s/test/tmpdb.sqlite" % {
-            "here": os.getcwd()
-        }
+        self.path = "sqlite:///%s/tmpdb.sqlite" % os.path.dirname(__file__)
         StoreTestCase.setUp(self)
 
 
